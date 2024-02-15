@@ -1,0 +1,248 @@
+<!-- This is Home Page-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <!--I have used internal Css in style Tag so no need of External File-->
+    <style>   
+        body {
+            background-color: rgb(93, 4, 4);
+            color: black;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        body.dark {
+            background-color: black;
+            color: black;
+        }
+
+        header,
+        footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: white;
+        }
+
+        footer {
+            margin-top: 3%;
+        }
+
+        #a,
+        #a1,
+        #a2,
+        #a3,
+        #a4,
+        #a5,
+        #a6,
+        #a7 {
+            text-decoration: none;
+            color: white;
+        }
+
+        #a8 {
+            text-decoration: none;
+        }
+
+        #a9 {
+            color: white;
+        }
+
+        .div {
+            display: flex;
+            align-items: center;
+        }
+
+        .div1,
+        #s5 {
+            text-align: center;
+            padding-top: 20px;
+            font-family: cursive;
+            font-size: 16px;
+            color: white;
+            text-shadow: #555;
+        }
+
+        #s,
+        #s1,
+        #s2,
+        #s3,
+        #s4 {
+            margin-right: 20px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #s1:hover {
+            background-color: black;
+            color: white;
+        }
+
+        #a9:hover {
+            background-color: black;
+            color: white;
+        }
+
+        #s2:hover {
+            background-color: black;
+            color: white;
+        }
+
+        #s3:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #s1:hover .dropdown {
+            display: block;
+        }
+
+        #s2:hover .dropdown {
+            display: block;
+        }
+
+        #s3:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown li {
+            padding: 10px;
+        }
+
+        .dropdown li:hover {
+            background-color: #555;
+        }
+
+        .sections-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px;
+        }
+
+        .text-section,
+        .image-section {
+            width: 48%;
+            margin-bottom: 20px;
+        }
+
+        #image1 {
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+        }
+
+        #p {
+            padding-top: 10%;
+            font-size: x-large;
+        }
+
+        #p1 {
+            padding-left: 40%;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .div {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            #s4 {
+                padding-left: 0;
+            }
+
+            .sections-container {
+                flex-direction: column;
+            }
+
+            .text-section,
+            .image-section {
+                width: 100%;
+            }
+
+            #s5 {
+                text-align: center;
+            }
+
+            .div1 {
+                padding-top: 20px;
+            }
+        }
+    </style>
+    <!--Internal Css ends here-->
+</head>
+
+<body>
+
+    <header> <!--header-->
+        <nav>
+            <div class="div">
+                <span id="s"><a href="https://nmsu.edu/"><img src="download.png" width="40px" height="40px"
+                            alt="logo" /></a></span>
+                <span id="s1">My Interests
+                    <ul class="dropdown"> <!--navigations-->
+                        <li><a href="interest.html" id='a'>Web Development</a></li>
+                    </ul>
+                </span>
+                <span id="s2">My Hobbies
+                    <ul class="dropdown">
+                        <li><a href="hobbies1.html" id="a4">Volley Ball</a></li>
+                    </ul>
+                </span>
+                <span id="s3">My Projects
+                    <ul class="dropdown">
+                        <li><a href="project.html" id="a6">1803 PSS</a></li>
+                    </ul>
+                </span>
+                <span id="s4"><a href="contact.html" id='a8'>Contact</a></span>
+            </div>
+        </nav>
+        <button id="toggle-theme">Theme</button>
+    </header> <!--hearder end-->
+
+    <!-- Body content start here -->
+    <div class="sections-container">
+        <section class="text-section">
+            <div class="div1">
+                <p id="p" style="padding-top: 10%;">- I am Swaroop Koyya, a dedicated and results-driven Master's student pursuing Computer Science at New Mexico State University. With a solid foundation in programming languages such as Python, C, C++, Java, and proficiency in web development technologies, I have successfully contributed to real-world projects during my tenure as a Software Developer at Wipro Technologies.</p>
+            </div>
+            <div id="s5"><a id='a9' href="https://www.linkedin.com/in/jyothiswaroopkoyya/">More About Me</a></div>
+        </section>
+
+        <section class="image-section">
+            <img src="Image.png" id="image1" alt="Description of the image">
+        </section>
+    </div>
+    <footer> <!--footer-->
+        <p id="p1">&copy; 2024 created and developed by swaroop.</p>
+    </footer>
+    <!-- Script tag for toggle button -->
+    <script>
+        document.getElementById("toggle-theme").onclick = function () {
+            document.getElementsByTagName("body")[0].classList.toggle("dark");
+        };
+    </script>
+
+</body>
+<!--body content ends here-->
+</html>

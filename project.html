@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects</title>
+    <!--I have used internal CSS so no need for External CSS-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        body.dark {
+            background-color: black;
+            color: white;
+        }
+
+        .content {
+            max-width: 800px; 
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 42.5%; 
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        header {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: rgb(0, 162, 255);
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        nav span {
+            margin-right: 20px;
+        }
+
+        #a1 {
+            text-decoration: none;
+            color: white;
+        }
+
+        #a1:hover {
+            color: black;
+            background-color: white;
+        }
+
+        footer {
+            background-color: rgb(0, 162, 255);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .div {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        #s1, #s2, #s3, #s4 {
+            margin-top: 10px;
+            margin-right: 20px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #a,#a1,#a2,#a3,#a4,#a5,#a6,#a7 {
+            text-decoration: none;
+            color: white;
+        }
+
+        #a8 {
+            text-decoration: none;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #s1:hover .dropdown {
+            display: block;
+        }
+
+        #s2:hover .dropdown {
+            display: block;
+        }
+
+        #s3:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown li {
+            padding: 10px;
+        }
+
+        .dropdown li:hover {
+            background-color: #555;
+        }
+
+        #s4 {
+            margin-top: 10px;
+            padding-left: 0;
+        }
+
+        @media only screen and (max-width: 600px) {
+            #s1, #s2, #s3, #s4 {
+                margin-top: 10px;
+                margin-right: 0;
+            }
+        }
+
+        @media only screen and (max-width: 800px) {
+            .content {
+                padding: 20px 10px;
+            }
+
+            .video-container {
+                padding-bottom: 56.25%; 
+            }
+        }
+    </style>
+    <!--CSS ends here-->
+</head>
+<body><!--Body content starts here-->
+    <header><!--Header Starts here-->
+        <div class="div"  style="color:black">
+            <nav>
+                <span id="s3"><a href="index.html" id ="a6" style="color:black">Home</a></span>
+                <span id="s1">My Interests
+                    <ul class="dropdown">
+                        <li><a href="interest.html" id ='a'>Web Development</a></li>
+                    </ul>
+                </span>
+                <span id="s2">My Hobbies
+                    <ul class="dropdown">
+                        <li><a href="hobbies1.html" id ="a4">Volley Ball</a></li>
+                    </ul>
+                </span>
+                <span id="s4"><a href="contact.html" id='a8'>Contact</a></span>
+            </nav>
+        </div>
+        <button id="toggle-theme">Theme</button>
+    </header>
+    <!--Header Ends here-->
+    <div class="content">
+        <h2>Nokia Photonic Service Switch 1830 PSS</h2>
+        <p>The 1830 Photonic Service Switch (PSS) is a family of DWDM multiservice, multilayer P-OTN transport platforms that provide efficient transport at any scale, from compact access to the converged Optical Transport Network (OTN)/DWDM core. With 1830 PSS, you can continuously scale your optical networks to meet unpredictable traffic demands.</p>
+
+        <h2>My Experience</h2>
+        <p>I worked for two years on this project. Mostly I worked on the Application side, which probably includes front-end technologies like JavaScript, HTML, CSS, and JSON.</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/vSat6CgTlyE" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <footer><!--Footer starts here-->
+        <p style="color:black">Created and copyrighted by Swaroop</p>
+    </footer><!--Footer ends here-->
+    <!--Script tag for toggle switch-->
+    <script>
+        document.getElementById("toggle-theme").onclick = function () {
+            document.getElementsByTagName("body")[0].classList.toggle("dark");
+        };
+    </script>
+</body><!--Body content ends here-->
+</html>
