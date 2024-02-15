@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Interest Page</title>
+    <!--I have used internal Css so no external css fine needed-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+
+        body.dark {
+            background-color: white;
+            color: black;
+        }
+
+        p {
+            text-decoration: underline;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color:rgb(0, 162, 255);
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .d1 {
+            text-align: center;
+        }
+
+        #a1 {
+            text-decoration: none;
+            color: white;
+        }
+
+        #a1:hover {
+            color: black;
+            background-color: white;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row; 
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .image-section,
+        .text-section {
+            flex: 1;
+            padding: 20px;
+            box-sizing: border-box; 
+        }
+
+        img {
+            width: 100%; 
+            height: auto;
+            border: 2px solid #555;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            background-color:rgb(0, 162, 255);
+            text-align: center;
+            padding: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .div {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            #s4 {
+                padding-left: 0;
+            }
+
+            .container {
+                flex-direction: column;
+            }
+
+            .text-section,
+            .image-section {
+                padding: 10px;
+            }
+        }
+
+        .div {
+            display: flex;
+            align-items: center;
+        }
+
+        #s, #s1, #s2, #s3, #s4 {
+            margin-right: 20px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #a, #a1, #a2, #a3, #a4, #a5, #a6, #a7 {
+            text-decoration: none;
+            color: white;
+        }
+
+        #a4{
+            color: white;
+        }
+
+        #a8 {
+            text-decoration: none;
+            color: white;
+        }
+
+        #s1:hover {
+            background-color: black;
+            color: white;
+        }
+
+        #s2:hover {
+            background-color: black;
+            color: white;
+        }
+
+        #s3:hover {
+            background-color: black;
+            color: white;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #s1:hover .dropdown {
+            display: block;
+        }
+
+        #s2:hover .dropdown {
+            display: block;
+        }
+
+        #s3:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown li {
+            padding: 10px;
+        }
+
+        .dropdown li:hover {
+            background-color: #555;
+        }
+
+        #s4 {
+            padding-left: 60.6vw;
+        }
+    </style>
+    <!--Css ends here-->
+</head>
+<body> <!--body Content starts here-->
+    <header id="h"> <!--Header strat from here-->
+        <nav>
+            <div class="div" style="color:white">
+                <span id="s1"><a href="index.html" id ='a'>Home</a>
+                </span>
+                <span id="s2">My Hobbies
+                    <ul class="dropdown">
+                        <li><a href="hobbies1.html" id ="a4">Volley Ball</a></li>
+                    </ul>   
+                </span>
+                <span id="s3">My Projects
+                    <ul class="dropdown">
+                        <li><a href="project.html" id ="a6">1803 PSS</a></li>
+                    </ul>  
+                </span>
+                <span id="s4"><a href="contact.html" id = 'a8'>Contact</a></span>
+            </div>
+        </nav>
+        <button id="toggle-theme">Theme</button>
+    </header> <!--Headre ends from here-->
+    <!--bodyContainer starts from here-->
+    <div class="container">
+        <div class="image-section">
+            <img src="web3.jpg" alt="Web Development Image 1">
+        </div>
+        <div class="text-section">
+            <p>Inventor:</p>
+            Sir Tim Berners-Lee is the visionary British computer scientist credited with inventing the World Wide Web (WWW).Tim Berners-Lee proposed the concept of the World Wide Web in 1989, outlining his vision for a globally accessible system of interlinked documents.
+            The development took place at CERN (European Organization for Nuclear Research), where Tim Berners-Lee was working at the time.
+            <p>First Web Browser:</p>
+            Tim Berners-Lee created the first web browser, initially named WorldWideWeb and later renamed Nexus, to navigate and display content on the web.
+            Alongside the browser, Tim Berners-Lee developed the first web server, laying the infrastructure for hosting and sharing web content.
+            In 1990, Tim Berners-Lee authored the first-ever web page, providing a glimpse into the possibilities of this new interconnected system.
+        </div>
+    </div>
+    <div class="container">
+        <div class="text-section">
+            <p>Global Reach:</p>
+            In today’s digital landscape, web development plays a pivotal role. We are more connected than ever before, thanks to the internet.
+            Web development allows individuals and businesses to reach a global audience, defying geographical barriers that were once unthinkable.
+            Whether you’re creating a personal blog, an e-commerce site, or a corporate portal, web development ensures your content is accessible worldwide.
+            <p>Business Growth and Brand Visibility:</p>
+            A well-designed website is a powerful marketing tool. It boosts brand visibility and attracts potential customers.
+            Businesses can showcase their products, services, and unique value propositions through their websites.
+            Online presence is essential for growth, customer engagement, and staying competitive in the market.
+            <p>User Experience (UX):</p>
+            Web development directly impacts user experience. A well-structured, user-friendly website keeps visitors engaged.
+            Intuitive navigation, fast loading times, and responsive design contribute to a positive UX.
+        </div>
+        <div class="image-section">
+            <img src="web2.jpg" alt="Web Development Image 2">
+        </div>
+    </div>
+    <div class="container">
+        <div class="image-section">
+            <img src="wwb4.jpg" alt="Web Development Image 1">
+        </div>
+        <div class="text-section">
+            <p>Short Education Time:</p>
+            Becoming a web developer often requires a short training period before starting your career.
+            Unlike some professions that demand years of formal education, web development allows you to enter the field relatively quickly.
+            <p>Salary Potential:</p>
+            Web developers earn an average salary of $67,225 per year1.
+            As you gain experience and specialize in certain areas (such as front-end or back-end development), your salary can increase.
+            <p>High Creative Potential:</p>
+            Web development combines creativity and problem-solving.
+            You get to shape the visual and functional aspects of websites, making each project unique.
+            Whether it’s designing user interfaces or implementing interactive features, creativity is at the core.
+            <p>Constant Learning:</p>
+            The tech industry evolves rapidly, and web developers must keep up with cutting-edge technologies.
+            Lifelong learning is part of the job, which keeps things exciting and intellectually stimulating.
+        </div>
+    </div>  
+    <div class="d1">
+        <h1><a href="https://en.wikipedia.org/wiki/Web_development" id = 'a1'>Learn More</a></h1>
+    </div>
+    <footer> <!--footer-->
+        <p>© 2024 created by swaroop</p>
+    </footer>  <!--footer ends here-->
+    <!--Script tag for toogle switch-->
+    <script>
+        document.getElementById("toggle-theme").onclick = function () {
+            document.getElementsByTagName("body")[0].classList.toggle("dark");
+        };
+    </script>
+</body>
+<!--body Container ends here-->
+</html>
