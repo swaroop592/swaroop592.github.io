@@ -1,248 +1,199 @@
-<!-- This is Home Page-->
-
 <!DOCTYPE html>
 <html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+		<title>Squash the Creeps (3D)</title>
+		<style>
+html, body, #canvas {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <!--I have used internal Css in style Tag so no need of External File-->
-    <style>   
-        body {
-            background-color: rgb(93, 4, 4);
-            color: black;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+body {
+	color: white;
+	background-color: black;
+	overflow: hidden;
+	touch-action: none;
+}
 
-        body.dark {
-            background-color: black;
-            color: black;
-        }
+#canvas {
+	display: block;
+}
 
-        header,
-        footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            background-color: white;
-        }
+#canvas:focus {
+	outline: none;
+}
 
-        footer {
-            margin-top: 3%;
-        }
+#status, #status-splash, #status-progress {
+	position: absolute;
+	left: 0;
+	right: 0;
+}
 
-        #a,
-        #a1,
-        #a2,
-        #a3,
-        #a4,
-        #a5,
-        #a6,
-        #a7 {
-            text-decoration: none;
-            color: white;
-        }
+#status, #status-splash {
+	top: 0;
+	bottom: 0;
+}
 
-        #a8 {
-            text-decoration: none;
-        }
+#status {
+	background-color: #242424;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	visibility: hidden;
+}
 
-        #a9 {
-            color: white;
-        }
+#status-splash {
+	max-height: 100%;
+	max-width: 100%;
+	margin: auto;
+}
 
-        .div {
-            display: flex;
-            align-items: center;
-        }
+#status-progress, #status-notice {
+	display: none;
+}
 
-        .div1,
-        #s5 {
-            text-align: center;
-            padding-top: 20px;
-            font-family: cursive;
-            font-size: 16px;
-            color: white;
-            text-shadow: #555;
-        }
+#status-progress {
+	bottom: 10%;
+	width: 50%;
+	margin: 0 auto;
+}
 
-        #s,
-        #s1,
-        #s2,
-        #s3,
-        #s4 {
-            margin-right: 20px;
-            padding: 10px;
-            cursor: pointer;
-        }
+#status-notice {
+	background-color: #5b3943;
+	border-radius: 0.5rem;
+	border: 1px solid #9b3943;
+	color: #e0e0e0;
+	font-family: 'Noto Sans', 'Droid Sans', Arial, sans-serif;
+	line-height: 1.3;
+	margin: 0 2rem;
+	overflow: hidden;
+	padding: 1rem;
+	text-align: center;
+	z-index: 1;
+}
+		</style>
+		<link id="-gd-engine-icon" rel="icon" type="image/png" href="index.icon.png" />
+<link rel="apple-touch-icon" href="index.apple-touch-icon.png"/>
+<script src="coi-serviceworker.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas">
+			Your browser does not support the canvas tag.
+		</canvas>
 
-        #s1:hover {
-            background-color: black;
-            color: white;
-        }
+		<noscript>
+			Your browser does not support JavaScript.
+		</noscript>
 
-        #a9:hover {
-            background-color: black;
-            color: white;
-        }
+		<div id="status">
+			<img id="status-splash" src="index.png" alt="">
+			<progress id="status-progress"></progress>
+			<div id="status-notice"></div>
+		</div>
 
-        #s2:hover {
-            background-color: black;
-            color: white;
-        }
+		<script src="index.js"></script>
+		<script>
+const GODOT_CONFIG = {"args":[],"canvasResizePolicy":2,"ensureCrossOriginIsolationHeaders":true,"executable":"index","experimentalVK":false,"fileSizes":{"index.pck":1726928,"index.wasm":43016933},"focusCanvas":true,"gdextensionLibs":[]};
+const GODOT_THREADS_ENABLED = false;
+const engine = new Engine(GODOT_CONFIG);
 
-        #s3:hover {
-            background-color: black;
-            color: white;
-        }
+(function () {
+	const statusOverlay = document.getElementById('status');
+	const statusProgress = document.getElementById('status-progress');
+	const statusNotice = document.getElementById('status-notice');
 
-        .dropdown {
-            display: none;
-            position: absolute;
-            background-color: #333;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
+	let initializing = true;
+	let statusMode = '';
 
-        #s1:hover .dropdown {
-            display: block;
-        }
+	function setStatusMode(mode) {
+		if (statusMode === mode || !initializing) {
+			return;
+		}
+		if (mode === 'hidden') {
+			statusOverlay.remove();
+			initializing = false;
+			return;
+		}
+		statusOverlay.style.visibility = 'visible';
+		statusProgress.style.display = mode === 'progress' ? 'block' : 'none';
+		statusNotice.style.display = mode === 'notice' ? 'block' : 'none';
+		statusMode = mode;
+	}
 
-        #s2:hover .dropdown {
-            display: block;
-        }
+	function setStatusNotice(text) {
+		while (statusNotice.lastChild) {
+			statusNotice.removeChild(statusNotice.lastChild);
+		}
+		const lines = text.split('\n');
+		lines.forEach((line) => {
+			statusNotice.appendChild(document.createTextNode(line));
+			statusNotice.appendChild(document.createElement('br'));
+		});
+	}
 
-        #s3:hover .dropdown {
-            display: block;
-        }
+	function displayFailureNotice(err) {
+		console.error(err);
+		if (err instanceof Error) {
+			setStatusNotice(err.message);
+		} else if (typeof err === 'string') {
+			setStatusNotice(err);
+		} else {
+			setStatusNotice('An unknown error occured');
+		}
+		setStatusMode('notice');
+		initializing = false;
+	}
 
-        .dropdown li {
-            padding: 10px;
-        }
+	const missing = Engine.getMissingFeatures({
+		threads: GODOT_THREADS_ENABLED,
+	});
 
-        .dropdown li:hover {
-            background-color: #555;
-        }
-
-        .sections-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin: 20px;
-        }
-
-        .text-section,
-        .image-section {
-            width: 48%;
-            margin-bottom: 20px;
-        }
-
-        #image1 {
-            border-radius: 10px;
-            width: 100%;
-            height: auto;
-        }
-
-        #p {
-            padding-top: 10%;
-            font-size: x-large;
-        }
-
-        #p1 {
-            padding-left: 40%;
-        }
-
-        @media only screen and (max-width: 600px) {
-            .div {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            #s4 {
-                padding-left: 0;
-            }
-
-            .sections-container {
-                flex-direction: column;
-            }
-
-            .text-section,
-            .image-section {
-                width: 100%;
-            }
-
-            #s5 {
-                text-align: center;
-            }
-
-            .div1 {
-                padding-top: 20px;
-            }
-        }
-    </style>
-    <!--Internal Css ends here-->
-</head>
-
-<body>
-
-    <header> <!--header-->
-        <nav>
-            <div class="div">
-                <span id="s"><a href="https://nmsu.edu/"><img src="download.png" width="40px" height="40px"
-                            alt="logo" /></a></span>
-                <span id="s1">My Interests
-                    <ul class="dropdown"> <!--navigations-->
-                        <li><a href="interest.html" id='a'>Web Development</a></li>
-                    </ul>
-                </span>
-                <span id="s2">My Hobbies
-                    <ul class="dropdown">
-                        <li><a href="hobbies1.html" id="a4">Volley Ball</a></li>
-                    </ul>
-                </span>
-                <span id="s3">My Projects
-                    <ul class="dropdown">
-                        <li><a href="project.html" id="a6">1803 PSS</a></li>
-                    </ul>
-                </span>
-                <span id="s4"><a href="contact.html" id='a8'>Contact</a></span>
-            </div>
-        </nav>
-        <button id="toggle-theme">Theme</button>
-    </header> <!--hearder end-->
-
-    <!-- Body content start here -->
-    <div class="sections-container">
-        <section class="text-section">
-            <div class="div1">
-                <p id="p" style="padding-top: 10%;">- I am Swaroop Koyya, a dedicated and results-driven Master's student pursuing Computer Science at New Mexico State University. With a solid foundation in programming languages such as Python, C, C++, Java, and proficiency in web development technologies, I have successfully contributed to real-world projects during my tenure as a Software Developer at Wipro Technologies.</p>
-            </div>
-            <div id="s5"><a id='a9' href="https://www.linkedin.com/in/jyothiswaroopkoyya/">More About Me</a></div>
-        </section>
-
-        <section class="image-section">
-            <img src="Image.png" id="image1" alt="Description of the image">
-        </section>
-    </div>
-    <footer> <!--footer-->
-        <p id="p1">&copy; 2024 created and developed by swaroop.</p>
-    </footer>
-    <!-- Script tag for toggle button -->
-    <script>
-        document.getElementById("toggle-theme").onclick = function () {
-            document.getElementsByTagName("body")[0].classList.toggle("dark");
-        };
-    </script>
-
-</body>
-<!--body content ends here-->
+	if (missing.length !== 0) {
+		if (GODOT_CONFIG['serviceWorker'] && GODOT_CONFIG['ensureCrossOriginIsolationHeaders'] && 'serviceWorker' in navigator) {
+			// There's a chance that installing the service worker would fix the issue
+			Promise.race([
+				navigator.serviceWorker.getRegistration().then((registration) => {
+					if (registration != null) {
+						return Promise.reject(new Error('Service worker already exists.'));
+					}
+					return registration;
+				}).then(() => engine.installServiceWorker()),
+				// For some reason, `getRegistration()` can stall
+				new Promise((resolve) => {
+					setTimeout(() => resolve(), 2000);
+				}),
+			]).catch((err) => {
+				console.error('Error while registering service worker:', err);
+			}).then(() => {
+				window.location.reload();
+			});
+		} else {
+			// Display the message as usual
+			const missingMsg = 'Error\nThe following features required to run Godot projects on the Web are missing:\n';
+			displayFailureNotice(missingMsg + missing.join('\n'));
+		}
+	} else {
+		setStatusMode('progress');
+		engine.startGame({
+			'onProgress': function (current, total) {
+				if (current > 0 && total > 0) {
+					statusProgress.value = current;
+					statusProgress.max = total;
+				} else {
+					statusProgress.removeAttribute('value');
+					statusProgress.removeAttribute('max');
+				}
+			},
+		}).then(() => {
+			setStatusMode('hidden');
+		}, displayFailureNotice);
+	}
+}());
+		</script>
+	</body>
 </html>
+
